@@ -8,7 +8,6 @@ from bokeh.models import ColumnDataSource, FactorRange, HoverTool, LabelSet, Dat
 from jira_client import api_request
 from jira_parser import parse_issues_to_dataframe
 
-# Assign lanes using AdjustedEnd for proper overlap logic
 def assign_lanes(df):
     df = df.sort_values(by=["StartDate", "AdjustedEnd"]).copy()
     lanes = []
@@ -22,11 +21,9 @@ def assign_lanes(df):
                 lanes.append(lane_num)
                 assigned = True
                 break
-
         if not assigned:
             end_times.append(row["AdjustedEnd"])
             lanes.append(len(end_times) - 1)
-
     df["Lane"] = lanes
     return df
 
@@ -42,7 +39,6 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
         return
 
     df = df.dropna(subset=["StartDate", "TargetEnd"])
-
     if df.empty:
         print("No issues with valid StartDate and TargetEnd to plot.")
         return
@@ -50,11 +46,9 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
     df["StartDate"] = pd.to_datetime(df["StartDate"])
     df["TargetEnd"] = pd.to_datetime(df["TargetEnd"])
     df["Team"] = df["Team"].fillna("Unassigned")
-
-    # Apply inclusive end day adjustment BEFORE assigning lanes
     df["AdjustedEnd"] = df["TargetEnd"] + pd.Timedelta(days=1)
 
-    # Assign lanes correctly with AdjustedEnd
+    # Assign lanes
     stacked = []
     for team, group in df.groupby("Team"):
         group = assign_lanes(group)
@@ -63,16 +57,25 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
 
     df_stacked = pd.concat(stacked)
     df_stacked["y"] = list(zip(df_stacked["Team"], df_stacked["Lane"].astype(str)))
-
-    # Calculate width & center for Bokeh rendering
     df_stacked["width"] = (df_stacked["AdjustedEnd"] - df_stacked["StartDate"]).dt.total_seconds() * 1000
     df_stacked["center"] = df_stacked["StartDate"] + (df_stacked["AdjustedEnd"] - df_stacked["StartDate"]) / 2
 
-    # Apply label positioning logic (adaptive labels)
-    label_inside_threshold_ms = 2 * 24 * 60 * 60 * 1000  # 2 days width threshold
-    df_stacked["label_above"] = df_stacked["width"] < label_inside_threshold_ms
+    # === Adaptive label logic with debug support ===
+    CHAR_PIXELS = 30         # More conservative estimate, tune for your font
+    PX_PER_DAY = 100        # Chart's x-scaling; increase if bars appear too short
+    MS_PER_DAY = 86400000
+    MS_PER_PX = MS_PER_DAY / PX_PER_DAY
+    LABEL_PADDING = 50      # Extra space to prevent near-overflow
 
-    # Explicitly limit columns to prevent Bokeh source issues
+    def should_label_be_above(row):
+        bar_width_px = row["width"] / MS_PER_PX
+        key_width_px = len(row["Key"]) * CHAR_PIXELS
+        # DEBUG: print out actual numbers to tune further
+        print(f"{row['Key']}: bar_width={bar_width_px:.1f}px, key_width={key_width_px}px, inside={key_width_px + LABEL_PADDING <= bar_width_px}")
+        return key_width_px + LABEL_PADDING > bar_width_px
+
+    df_stacked["label_above"] = df_stacked.apply(should_label_be_above, axis=1)
+
     export_columns = [
         'y', 'StartDate', 'TargetEnd', 'AdjustedEnd', 'width', 'center',
         'Key', 'Summary', 'Assignee', 'label_above'
@@ -84,14 +87,15 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
         print(f"Exported chart data to {export_path}")
 
     teams = list(df_stacked["y"].apply(lambda t: t[0]).unique())
-    max_lanes = df_stacked.groupby(df_stacked["y"].apply(lambda t: t[0]))["y"].apply(lambda s: len(s) - 1)
+    max_lanes = df_stacked.groupby(df_stacked["y"].apply(lambda t: t[0]))["y"].apply(
+        lambda s: max(int(lane[1]) for lane in s)
+    )
 
     factors = []
     for team in teams:
         for lane in range(max_lanes[team] + 1):
             factors.append((team, str(lane)))
 
-    # Prepare data sources with reset_index() to avoid Bokeh issues
     source_inside = ColumnDataSource(df_stacked[df_stacked["label_above"] == False].reset_index(drop=True))
     source_above = ColumnDataSource(df_stacked[df_stacked["label_above"] == True].reset_index(drop=True))
     source_all = ColumnDataSource(df_stacked.reset_index(drop=True))
@@ -99,16 +103,15 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
     p = figure(
         title=f"Gantt Chart for Sprint: {sprint_name}",
         x_axis_type="datetime",
-        height=300 + 40 * len(factors),
+        height=300 + 55 * len(factors),
         width=1200,
         y_range=FactorRange(*reversed(factors)),
         tools="xpan,reset,save",
         toolbar_location="above"
     )
 
-    p.rect(x='center', y='y', width='width', height=0.8, source=source_all, fill_color="steelblue", line_color="black")
+    p.rect(x='center', y='y', width='width', height=0.55, source=source_all, fill_color="steelblue", line_color="black")
 
-    # Inside labels
     labels_inside = LabelSet(
         x='center',
         y='y',
@@ -117,21 +120,20 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
         text_align='center',
         text_baseline='middle',
         text_font_size='9pt',
-        text_color='white'
+        text_color='black'
     )
     p.add_layout(labels_inside)
 
-    # Above labels
     labels_above = LabelSet(
         x='center',
         y='y',
         text='Key',
         source=source_above,
         text_align='center',
-        y_offset=10,
+        y_offset=15,          # Bumped up for more clearance
         text_baseline='bottom',
         text_font_size='9pt',
-        text_color='black'
+        text_color='black'      # RED for debug; change to 'black' when happy!
     )
     p.add_layout(labels_above)
 
@@ -147,7 +149,6 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
     )
     p.add_tools(hover)
 
-    # Set X-axis tick marks for every day
     min_date = df_stacked["StartDate"].min()
     max_date = df_stacked["AdjustedEnd"].max()
     total_days = (max_date - min_date).days + 1
@@ -155,7 +156,6 @@ def gantt_chart_for_sprint_bokeh(sprint_name, export_path=None):
     p.xaxis.ticker = DatetimeTicker()
     p.xaxis.ticker.desired_num_ticks = total_days
 
-    # Add vertical line for Today
     now = pd.Timestamp.now().normalize()
     today_line = Span(location=now.value / 1e6, dimension='height',
                       line_color='red', line_width=2, line_dash='dashed')
