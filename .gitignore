@@ -23,3 +23,6 @@ Thumbs.db
 
 #VScode workspace
 *.codeworkspace
+
+#OAuth Token
+token.json

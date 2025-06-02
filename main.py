@@ -3,6 +3,7 @@ import json
 from config import load_config, update_config, save_config
 from dotenv import load_dotenv
 from jira_client import api_request
+from jira_parser import parse_issues_to_dataframe
 
 DEFAULT_CONFIG = {
     "jira_url": "",
@@ -41,11 +42,36 @@ def query(args):
     try:
         result = api_request(
             endpoint="search",
-            params={"jql": args.jql, "maxResults": 10}
+            params={"jql": args.jql, "maxResults": 50}
         )
-        print(json.dumps(result, indent=2))
+        df = parse_issues_to_dataframe(result)
+        print(df)
+        if args.export:
+            df.to_csv(args.export, index=False)
+            print(f"Exported results to {args.export}")
     except Exception as e:
         print(f"Error running query: {e}")
+
+# New discover fields command
+def discover_fields(args):
+    print(f"Discovering fields with JQL: {args.jql}")
+    try:
+        result = api_request(
+            endpoint="search",
+            params={"jql": args.jql, "maxResults": 1}
+        )
+
+        issue = result["issues"][0]
+        fields = issue.get("fields", {})
+
+        for key, value in fields.items():
+            short_value = str(value)
+            if len(short_value) > 200:
+                short_value = short_value[:200] + "..."
+            print(f"{key}: {short_value}")
+
+    except Exception as e:
+        print(f"Error discovering fields: {e}")
 
 def main():
     load_dotenv()
@@ -71,7 +97,13 @@ def main():
     # query command
     query_parser = subparsers.add_parser('query', help='Run JQL query')
     query_parser.add_argument('--jql', required=True)
+    query_parser.add_argument('--export', help='Export results to CSV file')
     query_parser.set_defaults(func=query)
+
+    # discover-fields command
+    discover_parser = subparsers.add_parser('discover-fields', help='Discover field keys from Jira')
+    discover_parser.add_argument('--jql', required=True)
+    discover_parser.set_defaults(func=discover_fields)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):
