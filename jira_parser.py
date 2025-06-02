@@ -22,6 +22,12 @@ def parse_issues_to_dataframe(jira_json):
         if sprint_list and isinstance(sprint_list, list) and len(sprint_list) > 0:
             sprint_name = sprint_list[0].get("name")
 
+        # IssueType extraction
+        issuetype = fields.get("issuetype", {})
+        issue_type_name = issuetype.get("name")
+        issue_type_subtask = issuetype.get("subtask")
+        issue_type_hierarchy = issuetype.get("hierarchyLevel")
+
         parsed_issue = {
             "Key": issue.get("key"),
             "Summary": fields.get("summary"),
@@ -36,7 +42,10 @@ def parse_issues_to_dataframe(jira_json):
             "StartDate": fields.get(START_DATE_FIELD),
             "TargetEnd": fields.get(TARGET_END_FIELD),
             "Team": fields.get(TEAM_FIELD, {}).get("name") if fields.get(TEAM_FIELD) else None,
-            "Sprint": sprint_name
+            "Sprint": sprint_name,
+            "IssueType": issue_type_name,
+            "IssueTypeSubtask": issue_type_subtask,
+            "IssueTypeHierarchy": issue_type_hierarchy
         }
 
         parsed.append(parsed_issue)

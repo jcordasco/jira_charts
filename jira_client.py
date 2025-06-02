@@ -2,16 +2,16 @@ import os
 import json
 import threading
 import webbrowser
+import requests
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-
 from dotenv import load_dotenv
 from requests_oauthlib import OAuth2Session
+from requests import HTTPError
 
-# Load environment variables
+# Load env variables
 load_dotenv()
 
-# Load from .env file
 CLIENT_ID = os.getenv("JIRA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("JIRA_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("JIRA_REDIRECT_URI")
@@ -20,10 +20,10 @@ TOKEN_URL = "https://auth.atlassian.com/oauth/token"
 API_BASE_URL = "https://api.atlassian.com"
 SCOPES = ["read:jira-work", "offline_access"]
 
-# File to persist token
 TOKEN_FILE = "token.json"
+CLOUD_FILE = "cloud.json"
 
-# HTTP Server for callback
+# OAuth Callback Server
 class OAuthCallbackHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_url = urlparse(self.path)
@@ -39,7 +39,7 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
             self.wfile.write(b'Missing authorization code.')
 
     def log_message(self, format, *args):
-        return  # Silence server logs
+        return
 
 def start_http_server():
     server = HTTPServer(("127.0.0.1", 5000), OAuthCallbackHandler)
@@ -47,11 +47,10 @@ def start_http_server():
     thread.start()
     return server
 
-# OAuth flow
+# OAuth 2 authorization flow
 def oauth_flow():
     oauth = OAuth2Session(CLIENT_ID, redirect_uri=REDIRECT_URI, scope=SCOPES)
     authorization_url, state = oauth.authorization_url(AUTHORIZATION_BASE_URL)
-
     print("Opening browser for authorization...")
     print(f"If browser does not open, visit this URL manually:\n{authorization_url}")
     webbrowser.open(authorization_url)
@@ -68,66 +67,115 @@ def oauth_flow():
         code=code
     )
     save_token(token)
+
+    cloud_id = fetch_cloud_id(token)
+    save_cloud_id(cloud_id)
+
     return token
 
-# Save token to file
+# Token persistence
 def save_token(token):
     with open(TOKEN_FILE, "w") as f:
         json.dump(token, f, indent=4)
 
-# Load token from file
 def load_token():
     if not os.path.exists(TOKEN_FILE):
         return None
     with open(TOKEN_FILE, "r") as f:
         return json.load(f)
 
-# Refresh token if needed
-def refresh_token_if_needed(token):
-    if token and 'refresh_token' in token:
-        extra = {'client_id': CLIENT_ID, 'client_secret': CLIENT_SECRET}
-        oauth = OAuth2Session(CLIENT_ID, token=token)
-        if oauth.token['expires_in'] < 60:
-            print("Refreshing token...")
-            token = oauth.refresh_token(TOKEN_URL, refresh_token=token['refresh_token'], **extra)
-            save_token(token)
-    return token
+# Cloud ID persistence
+def save_cloud_id(cloud_id):
+    with open(CLOUD_FILE, "w") as f:
+        json.dump({"cloud_id": cloud_id}, f)
 
-# Get valid token (load, refresh or start new flow)
+def load_cloud_id():
+    if os.path.exists(CLOUD_FILE):
+        with open(CLOUD_FILE, "r") as f:
+            return json.load(f)["cloud_id"]
+    return None
+
+# Manual refresh token handling (direct requests)
+def refresh_token(token):
+    print("Refreshing token...")
+    data = {
+        'grant_type': 'refresh_token',
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET,
+        'refresh_token': token['refresh_token']
+    }
+    response = requests.post(TOKEN_URL, data=data)
+    response.raise_for_status()
+    refreshed_token = response.json()
+    save_token(refreshed_token)
+    return refreshed_token
+
 def get_token():
     token = load_token()
     if token:
-        return refresh_token_if_needed(token)
+        return token
     return oauth_flow()
 
-# Generic API request wrapper
-def api_request(endpoint, method="GET", params=None, data=None):
-    token = get_token()
+# Cloud ID discovery
+def fetch_cloud_id(token):
     oauth = OAuth2Session(CLIENT_ID, token=token)
-
-    # First we need cloud ID
-    cloud_ids = oauth.get(f"{API_BASE_URL}/oauth/token/accessible-resources").json()
+    response = oauth.get(f"{API_BASE_URL}/oauth/token/accessible-resources")
+    response.raise_for_status()
+    cloud_ids = response.json()
     if not cloud_ids:
         raise Exception("No accessible Jira resources found.")
-    cloud_id = cloud_ids[0]["id"]
+    return cloud_ids[0]["id"]
+
+# Main API request with refresh handling and optional pagination
+def api_request(endpoint, method="GET", params=None, data=None, paginate=False):
+    token = get_token()
+    cloud_id = load_cloud_id()
+    if not cloud_id:
+        cloud_id = fetch_cloud_id(token)
+        save_cloud_id(cloud_id)
 
     url = f"{API_BASE_URL}/ex/jira/{cloud_id}/rest/api/3/{endpoint}"
+    oauth = OAuth2Session(CLIENT_ID, token=token)
 
-    response = oauth.request(method, url, params=params, json=data)
+    try:
+        if not paginate:
+            response = oauth.request(method, url, params=params, json=data)
+            response.raise_for_status()
+            return response.json()
 
-    if response.status_code >= 400:
-        raise Exception(f"API request failed: {response.status_code} {response.text}")
+        # Pagination logic
+        all_issues = []
+        start_at = 0
+        max_results = 100
 
-    return response.json()
+        while True:
+            paged_params = dict(params or {})
+            paged_params.update({
+                "startAt": start_at,
+                "maxResults": max_results
+            })
 
-# Simple test function
-if __name__ == "__main__":
-    # Example JQL query: project = YOURPROJECT
-    jql = 'project = TEST'
+            response = oauth.request(method, url, params=paged_params, json=data)
+            response.raise_for_status()
+            result = response.json()
 
-    result = api_request(
-        endpoint="search",
-        params={"jql": jql, "maxResults": 10}
-    )
+            issues = result.get("issues", [])
+            all_issues.extend(issues)
 
-    print(json.dumps(result, indent=2))
+            total = result.get("total", 0)
+            start_at += max_results
+
+            if start_at >= total:
+                break
+
+        return {"issues": all_issues}
+
+    except HTTPError as e:
+        if e.response.status_code == 401:
+            token = refresh_token(token)
+            oauth = OAuth2Session(CLIENT_ID, token=token)
+            response = oauth.request(method, url, params=params, json=data)
+            response.raise_for_status()
+            return response.json()
+        else:
+            raise

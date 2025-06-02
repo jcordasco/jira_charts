@@ -3,4 +3,5 @@ requests-oauthlib
 pandas
 matplotlib
 python-dotenv
+bokeh
 

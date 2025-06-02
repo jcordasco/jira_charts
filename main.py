@@ -4,6 +4,7 @@ from config import load_config, update_config, save_config
 from dotenv import load_dotenv
 from jira_client import api_request
 from jira_parser import parse_issues_to_dataframe
+from charts_bokeh import gantt_chart_for_sprint_bokeh
 
 DEFAULT_CONFIG = {
     "jira_url": "",
@@ -38,27 +39,39 @@ def reset_config(args):
     print("Configuration reset to defaults.")
 
 def query(args):
-    print(f"Running JQL: {args.jql}")
     try:
+        if args.sprint_name:
+            jql = f'Sprint = "{args.sprint_name}"'
+            print(f"Running Sprint name query: {jql}")
+        elif args.jql:
+            jql = args.jql
+            print(f"Running JQL query: {jql}")
+        else:
+            print("You must supply either --jql or --sprint-name")
+            return
+
         result = api_request(
             endpoint="search",
-            params={"jql": args.jql, "maxResults": 50}
+            params={"jql": jql},
+            paginate=True
         )
         df = parse_issues_to_dataframe(result)
         print(df)
+
         if args.export:
             df.to_csv(args.export, index=False)
             print(f"Exported results to {args.export}")
+
     except Exception as e:
         print(f"Error running query: {e}")
 
-# New discover fields command
 def discover_fields(args):
     print(f"Discovering fields with JQL: {args.jql}")
     try:
         result = api_request(
             endpoint="search",
-            params={"jql": args.jql, "maxResults": 1}
+            params={"jql": args.jql, "maxResults": 1},
+            paginate=False
         )
 
         issue = result["issues"][0]
@@ -72,6 +85,9 @@ def discover_fields(args):
 
     except Exception as e:
         print(f"Error discovering fields: {e}")
+
+def run_chart(args):
+    gantt_chart_for_sprint_bokeh(args.sprint_name, export_path=args.export)
 
 def main():
     load_dotenv()
@@ -96,7 +112,8 @@ def main():
 
     # query command
     query_parser = subparsers.add_parser('query', help='Run JQL query')
-    query_parser.add_argument('--jql', required=True)
+    query_parser.add_argument('--jql', help='Run raw JQL query')
+    query_parser.add_argument('--sprint-name', help='Sprint name to query using JQL')
     query_parser.add_argument('--export', help='Export results to CSV file')
     query_parser.set_defaults(func=query)
 
@@ -104,6 +121,12 @@ def main():
     discover_parser = subparsers.add_parser('discover-fields', help='Discover field keys from Jira')
     discover_parser.add_argument('--jql', required=True)
     discover_parser.set_defaults(func=discover_fields)
+
+    # chart command
+    chart_parser = subparsers.add_parser('chart', help='Generate Gantt chart for a sprint')
+    chart_parser.add_argument('--sprint-name', required=True, help='Sprint name for Gantt chart')
+    chart_parser.add_argument('--export', help='Optional path to export chart data to CSV')
+    chart_parser.set_defaults(func=run_chart)
 
     args = parser.parse_args()
     if hasattr(args, 'func'):
