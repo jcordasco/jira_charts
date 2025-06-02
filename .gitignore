@@ -1,0 +1,25 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables and secrets
+.env
+
+# Config files that might contain sensitive data
+config.json
+
+# Exported data
+*.csv
+*.xlsx
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+#VScode workspace
+*.codeworkspace

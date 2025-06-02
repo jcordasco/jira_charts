@@ -1,0 +1,6 @@
+requests
+requests-oauthlib
+pandas
+matplotlib
+python-dotenv
+
