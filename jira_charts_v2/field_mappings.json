@@ -1,0 +1,14 @@
+{
+  "Summary": "fields.summary",
+  "Status": "fields.status.name",
+  "StatusCategory": "fields.status.statusCategory.name",
+  "Created": "fields.created",
+  "Resolved": "fields.resolutiondate",
+  "StoryPoints": "fields.customfield_10024",
+  "Assignee": "fields.assignee.displayName",
+  "TempDev": "fields.customfield_10101.displayName",
+  "QATester": "fields.customfield_10102.displayName",
+  "StartDate": "fields.customfield_10103",
+  "TargetEnd": "fields.customfield_10104",
+  "Team": "fields.customfield_10500.name"
+}
