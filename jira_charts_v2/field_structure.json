@@ -1,0 +1,2308 @@
+[
+    {
+        "id": "parent",
+        "name": "Parent",
+        "type": "unknown",
+        "children": [
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "key",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "fields",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "summary",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "status",
+                        "type": "object",
+                        "children": [
+                            {
+                                "id": "self",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "description",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "iconUrl",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "name",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "id",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "statusCategory",
+                                "type": "object",
+                                "children": [
+                                    {
+                                        "id": "self",
+                                        "type": "string",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "id",
+                                        "type": "number",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "key",
+                                        "type": "string",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "colorName",
+                                        "type": "string",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "name",
+                                        "type": "string",
+                                        "children": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "priority",
+                        "type": "object",
+                        "children": [
+                            {
+                                "id": "self",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "iconUrl",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "name",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "id",
+                                "type": "string",
+                                "children": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": "issuetype",
+                        "type": "object",
+                        "children": [
+                            {
+                                "id": "self",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "id",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "description",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "iconUrl",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "name",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "subtask",
+                                "type": "boolean",
+                                "children": null
+                            },
+                            {
+                                "id": "avatarId",
+                                "type": "number",
+                                "children": null
+                            },
+                            {
+                                "id": "hierarchyLevel",
+                                "type": "number",
+                                "children": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_13100",
+        "name": "Dev_BL_Dev",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13221",
+        "name": "Design",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13462",
+        "name": "QA Not Planned",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13220",
+        "name": "Rejection Reason",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_12010",
+        "name": "Team Review Date",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "statusCategory",
+        "name": "Status Category",
+        "type": "statusCategory",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "key",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "colorName",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "resolution",
+        "name": "Resolution",
+        "type": "resolution",
+        "children": null
+    },
+    {
+        "id": "customfield_10500",
+        "name": "Epicor Case",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12800",
+        "name": "DEV_Req",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "lastViewed",
+        "name": "Last Viewed",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_12000",
+        "name": "EnterDev",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13330",
+        "name": "Request Description",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13212",
+        "name": "TS Reporter",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12001",
+        "name": "temp_EnterQA",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13214",
+        "name": "Database Change",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13213",
+        "name": "Category",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "labels",
+        "name": "Labels",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13207",
+        "name": "Submitted forms",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13206",
+        "name": "Open forms",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13209",
+        "name": "Total forms",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13208",
+        "name": "Locked forms",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_11701",
+        "name": "Release",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "aggregatetimeoriginalestimate",
+        "name": "\u03a3 Original Estimate",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "issuelinks",
+        "name": "Linked Issues",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "assignee",
+        "name": "Assignee",
+        "type": "user",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountId",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "emailAddress",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "avatarUrls",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "48x48",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "24x24",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "16x16",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "32x32",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            },
+            {
+                "id": "displayName",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "active",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "timeZone",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountType",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "components",
+        "name": "Components",
+        "type": "array",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13201",
+        "name": "Affected services",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13200",
+        "name": "Request language",
+        "type": "sd-request-lang",
+        "children": null
+    },
+    {
+        "id": "customfield_13203",
+        "name": "Additional Considerations V2",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13202",
+        "name": "Issue Category",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13205",
+        "name": "Additional Considerations V3",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_10600",
+        "name": "Tested Version/s",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_12901",
+        "name": "Fail_Dev",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_10601",
+        "name": "Supported Hardware",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_12900",
+        "name": "Release Notes",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12903",
+        "name": "Backlog_QA_Val",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_12902",
+        "name": "Fail_QA",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_12904",
+        "name": "Backlog_Closed",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "subtasks",
+        "name": "Sub-tasks",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "reporter",
+        "name": "Reporter",
+        "type": "user",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountId",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "emailAddress",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "avatarUrls",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "48x48",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "24x24",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "16x16",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "32x32",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            },
+            {
+                "id": "displayName",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "active",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "timeZone",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountType",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_12105",
+        "name": "Approved By",
+        "type": "user",
+        "children": null
+    },
+    {
+        "id": "customfield_11801",
+        "name": "temp_dev",
+        "type": "user",
+        "children": null
+    },
+    {
+        "id": "customfield_13429",
+        "name": "Live Testing",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_11800",
+        "name": "temp_DevComplete",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_11802",
+        "name": "temp_DevInProgress",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "progress",
+        "name": "Progress",
+        "type": "progress",
+        "children": [
+            {
+                "id": "progress",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "total",
+                "type": "number",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "votes",
+        "name": "Votes",
+        "type": "votes",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "votes",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "hasVoted",
+                "type": "boolean",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "issuetype",
+        "name": "Issue Type",
+        "type": "issuetype",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "description",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "iconUrl",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "subtask",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "avatarId",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "hierarchyLevel",
+                "type": "number",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "project",
+        "name": "Project",
+        "type": "project",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "key",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "projectTypeKey",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "simplified",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "avatarUrls",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "48x48",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "24x24",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "16x16",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "32x32",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            },
+            {
+                "id": "projectCategory",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "self",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "id",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "description",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "name",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_11000",
+        "name": "Parent Link",
+        "type": "any",
+        "children": [
+            {
+                "id": "hasEpicLinkFieldDependency",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "showField",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "nonEditableReason",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "reason",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "message",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_10700",
+        "name": "Robocrib Version",
+        "type": "option-with-child",
+        "children": null
+    },
+    {
+        "id": "customfield_10701",
+        "name": "Resolution Description",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_10702",
+        "name": "Changeset",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "resolutiondate",
+        "name": "Resolved",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "watches",
+        "name": "Watchers",
+        "type": "watches",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "watchCount",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "isWatching",
+                "type": "boolean",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_12200",
+        "name": "Bug Reason",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13528",
+        "name": "Test Cases Needed",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_11900",
+        "name": "Organizations",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13529",
+        "name": "Have you entered all test cases in TestRail for this Issue?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "updated",
+        "name": "Updated",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "timeoriginalestimate",
+        "name": "Original estimate",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "description",
+        "name": "Description",
+        "type": "string",
+        "children": [
+            {
+                "id": "type",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "version",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "content",
+                "type": "array",
+                "children": [
+                    {
+                        "id": "type",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "attrs",
+                        "type": "object",
+                        "children": [
+                            {
+                                "id": "level",
+                                "type": "number",
+                                "children": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": "content",
+                        "type": "array",
+                        "children": [
+                            {
+                                "id": "type",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "text",
+                                "type": "string",
+                                "children": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_10010",
+        "name": "Story Points",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_11100",
+        "name": "Deffered-Improvement",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_10007",
+        "name": "Rank",
+        "type": "any",
+        "children": null
+    },
+    {
+        "id": "customfield_10008",
+        "name": "Flagged",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_10800",
+        "name": "CC",
+        "type": "user",
+        "children": null
+    },
+    {
+        "id": "customfield_10009",
+        "name": "Epic/Theme",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13191",
+        "name": "Target start",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "summary",
+        "name": "Summary",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13190",
+        "name": "Backlog Grooming Notes",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13193",
+        "name": "URL",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13192",
+        "name": "Target end",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "customfield_13195",
+        "name": "Additional Considerations",
+        "type": "string",
+        "children": [
+            {
+                "id": "type",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "version",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "content",
+                "type": "array",
+                "children": [
+                    {
+                        "id": "type",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "attrs",
+                        "type": "object",
+                        "children": [
+                            {
+                                "id": "isNumberColumnEnabled",
+                                "type": "boolean",
+                                "children": null
+                            },
+                            {
+                                "id": "layout",
+                                "type": "string",
+                                "children": null
+                            }
+                        ]
+                    },
+                    {
+                        "id": "content",
+                        "type": "array",
+                        "children": [
+                            {
+                                "id": "type",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "content",
+                                "type": "array",
+                                "children": [
+                                    {
+                                        "id": "type",
+                                        "type": "string",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "attrs",
+                                        "type": "object",
+                                        "children": null
+                                    },
+                                    {
+                                        "id": "content",
+                                        "type": "array",
+                                        "children": [
+                                            {
+                                                "id": "type",
+                                                "type": "string",
+                                                "children": null
+                                            },
+                                            {
+                                                "id": "content",
+                                                "type": "array",
+                                                "children": [
+                                                    {
+                                                        "id": "type",
+                                                        "type": "string",
+                                                        "children": null
+                                                    },
+                                                    {
+                                                        "id": "text",
+                                                        "type": "string",
+                                                        "children": null
+                                                    },
+                                                    {
+                                                        "id": "marks",
+                                                        "type": "array",
+                                                        "children": [
+                                                            {
+                                                                "id": "type",
+                                                                "type": "string",
+                                                                "children": null
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_13194",
+        "name": "Refinement Status",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13196",
+        "name": "QA Tester",
+        "type": "user",
+        "children": null
+    },
+    {
+        "id": "customfield_13199",
+        "name": "Satisfaction date",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_10000",
+        "name": "[CHART] Date of First Response",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_10001",
+        "name": "[CHART] Time in Status",
+        "type": "any",
+        "children": null
+    },
+    {
+        "id": "customfield_12301",
+        "name": "temp_QA_In_Progress",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_10002",
+        "name": "Sprint",
+        "type": "array",
+        "children": [
+            {
+                "id": "id",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "state",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "boardId",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "goal",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "startDate",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "endDate",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_12300",
+        "name": "temp_Enter_Backlog",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_12303",
+        "name": "temp_Enter_Deployed",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_10003",
+        "name": "Epic Link",
+        "type": "any",
+        "children": null
+    },
+    {
+        "id": "customfield_12302",
+        "name": "temp_Enter_QAApproved",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "environment",
+        "name": "Environment",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "duedate",
+        "name": "Due date",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "customfield_13180",
+        "name": "Size1",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "statuscategorychangedate",
+        "name": "Status Category Changed",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13182",
+        "name": "Field2",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13181",
+        "name": "Range2",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13184",
+        "name": "Supplier Report?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13183",
+        "name": "Size2",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13186",
+        "name": "Actual Report LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13185",
+        "name": "Estimated Report LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13188",
+        "name": "DoD",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "fixVersions",
+        "name": "Fix versions",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13189",
+        "name": "Now > Next > Later",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_11200",
+        "name": "Development",
+        "type": "any",
+        "children": null
+    },
+    {
+        "id": "customfield_13171",
+        "name": "Effort Category",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13170",
+        "name": "Time Spent (Hours)",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13173",
+        "name": "MyGroup (Category)",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13172",
+        "name": "Unit Test Required?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13175",
+        "name": "Description2",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13174",
+        "name": "Name",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13177",
+        "name": "DateField",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13298",
+        "name": "Product / Project Impacted",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13176",
+        "name": "MyDate",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13297",
+        "name": "Point of Contact",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13179",
+        "name": "Field1",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13178",
+        "name": "Range1",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13299",
+        "name": "Requestor",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12400",
+        "name": "Main/Release Branch Changeset",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "priority",
+        "name": "Priority",
+        "type": "priority",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "iconUrl",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "timeestimate",
+        "name": "Remaining Estimate",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "versions",
+        "name": "Affects versions",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "status",
+        "name": "Status",
+        "type": "status",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "description",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "iconUrl",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "statusCategory",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "self",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "id",
+                        "type": "number",
+                        "children": null
+                    },
+                    {
+                        "id": "key",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "colorName",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "name",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_13160",
+        "name": "Install Script Required?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13161",
+        "name": "Local Database Update Required?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13163",
+        "name": "MSSync Version",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13166",
+        "name": "Estimated DEV LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13165",
+        "name": "Table Provisioning",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13168",
+        "name": "Satisfaction",
+        "type": "sd-feedback",
+        "children": null
+    },
+    {
+        "id": "customfield_13167",
+        "name": "Actual DEV LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_11300",
+        "name": "Parent Epicor Case",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "aggregatetimeestimate",
+        "name": "\u03a3 Remaining Estimate",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "creator",
+        "name": "Creator",
+        "type": "user",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountId",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "emailAddress",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "avatarUrls",
+                "type": "object",
+                "children": [
+                    {
+                        "id": "48x48",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "24x24",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "16x16",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "32x32",
+                        "type": "string",
+                        "children": null
+                    }
+                ]
+            },
+            {
+                "id": "displayName",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "active",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "timeZone",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "accountType",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13151",
+        "name": "Assumptions and Dependencies",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13150",
+        "name": "Deliverables",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13153",
+        "name": "Test Criteria",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13155",
+        "name": "Risks",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13396",
+        "name": "Automation Status",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13154",
+        "name": "Time Estimate (Hours)",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13157",
+        "name": "Severity",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "aggregateprogress",
+        "name": "\u03a3 Progress",
+        "type": "progress",
+        "children": [
+            {
+                "id": "progress",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "total",
+                "type": "number",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13156",
+        "name": "Customer Email",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13159",
+        "name": "Workflow (AutoCrib)",
+        "type": "option-with-child",
+        "children": null
+    },
+    {
+        "id": "customfield_13158",
+        "name": "Issue color",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12501",
+        "name": ".Net Issue/Bug environment",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_12500",
+        "name": "Files Changed",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12613",
+        "name": "SQL script required?",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_12612",
+        "name": "Will change affect AC reporting?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_12614",
+        "name": "Affects hardware performance?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13261",
+        "name": "Goals",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13140",
+        "name": "Request Type",
+        "type": "sd-customerrequesttype",
+        "children": null
+    },
+    {
+        "id": "customfield_13260",
+        "name": "Subtask Type",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "timespent",
+        "name": "Time Spent",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13142",
+        "name": "Request participants",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13262",
+        "name": "Tested Version Number",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13141",
+        "name": "Change Impact",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13144",
+        "name": "Web Browser",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13264",
+        "name": "Documentation",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13143",
+        "name": "Story point estimate",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13146",
+        "name": "Out of Scope",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13145",
+        "name": "Operating System",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13148",
+        "name": "Goals/Objectives",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "aggregatetimespent",
+        "name": "\u03a3 Time Spent",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13147",
+        "name": "Scope",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12611",
+        "name": "Attached spec or design?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_12610",
+        "name": "Have workflows changed since the creation of this software version?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13149",
+        "name": "Testing Types",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_11400",
+        "name": "Team",
+        "type": "team",
+        "children": [
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "name",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "avatarUrl",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "isVisible",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "isVerified",
+                "type": "boolean",
+                "children": null
+            },
+            {
+                "id": "title",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "isShared",
+                "type": "boolean",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_12602",
+        "name": "Customer or Distributor",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12601",
+        "name": "Sales Order",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12603",
+        "name": "Deadline for Deployment",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "customfield_12606",
+        "name": "Version of Autocrib tested",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12605",
+        "name": "List any pre-requisites",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12608",
+        "name": "Subcomponents require config?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_12607",
+        "name": "List Subcomponents",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "workratio",
+        "name": "Work Ratio",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_12609",
+        "name": "Installation instructions",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13250",
+        "name": "Project overview status",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13371",
+        "name": "Delivery progress",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13370",
+        "name": "Linked issues",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13252",
+        "name": "HX60 DB Move",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13131",
+        "name": "AC Screen",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "created",
+        "name": "Created",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13372",
+        "name": "Delivery status",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13251",
+        "name": "Rework Subtask",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13130",
+        "name": "AC Module",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13495",
+        "name": "Includes Nuget Package change validated on all APIs",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13135",
+        "name": "Start date",
+        "type": "date",
+        "children": null
+    },
+    {
+        "id": "customfield_13498",
+        "name": "List all modified projects",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13134",
+        "name": "Dev Testing",
+        "type": "option",
+        "children": [
+            {
+                "id": "self",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "value",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "id",
+                "type": "string",
+                "children": null
+            }
+        ]
+    },
+    {
+        "id": "customfield_13137",
+        "name": "Number of Ambiguities Found",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13136",
+        "name": "Points",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_10300",
+        "name": "Environment",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13139",
+        "name": "Pre-Merge Version",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_12600",
+        "name": "Name of Dev. Requester",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13259",
+        "name": "Sentiment",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_11501",
+        "name": "Actual QA LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13129",
+        "name": "AC Menu",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13364",
+        "name": "Idea archived by",
+        "type": "array",
+        "children": null
+    },
+    {
+        "id": "customfield_13363",
+        "name": "Idea archived",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13000",
+        "name": "Database script required?",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13366",
+        "name": "Atlassian project",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13365",
+        "name": "Idea archived on",
+        "type": "datetime",
+        "children": null
+    },
+    {
+        "id": "customfield_13126",
+        "name": "Phase",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "customfield_13368",
+        "name": "Insights",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13367",
+        "name": "Atlassian project status",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_13128",
+        "name": "temp_support",
+        "type": "user",
+        "children": null
+    },
+    {
+        "id": "customfield_13249",
+        "name": "Project overview key",
+        "type": "string",
+        "children": null
+    },
+    {
+        "id": "customfield_11500",
+        "name": "Estimated QA LOE",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13369",
+        "name": "Comments",
+        "type": "number",
+        "children": null
+    },
+    {
+        "id": "customfield_13248",
+        "name": "Custom Description",
+        "type": "string",
+        "children": [
+            {
+                "id": "type",
+                "type": "string",
+                "children": null
+            },
+            {
+                "id": "version",
+                "type": "number",
+                "children": null
+            },
+            {
+                "id": "content",
+                "type": "array",
+                "children": [
+                    {
+                        "id": "type",
+                        "type": "string",
+                        "children": null
+                    },
+                    {
+                        "id": "content",
+                        "type": "array",
+                        "children": [
+                            {
+                                "id": "type",
+                                "type": "string",
+                                "children": null
+                            },
+                            {
+                                "id": "text",
+                                "type": "string",
+                                "children": null
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "customfield_12700",
+        "name": "Code branch",
+        "type": "option",
+        "children": null
+    },
+    {
+        "id": "security",
+        "name": "Security Level",
+        "type": "securitylevel",
+        "children": null
+    },
+    {
+        "id": "customfield_10400",
+        "name": "Approvals",
+        "type": "sd-approvals",
+        "children": null
+    },
+    {
+        "id": "customfield_11602",
+        "name": "temp_qa",
+        "type": "user",
+        "children": null
+    }
+]

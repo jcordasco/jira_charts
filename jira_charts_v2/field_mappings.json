@@ -4,11 +4,11 @@
   "StatusCategory": "fields.status.statusCategory.name",
   "Created": "fields.created",
   "Resolved": "fields.resolutiondate",
-  "StoryPoints": "fields.customfield_10024",
+  "StoryPoints": "fields.customfield_10010",
   "Assignee": "fields.assignee.displayName",
-  "TempDev": "fields.customfield_10101.displayName",
-  "QATester": "fields.customfield_10102.displayName",
-  "StartDate": "fields.customfield_10103",
-  "TargetEnd": "fields.customfield_10104",
-  "Team": "fields.customfield_10500.name"
+  "TempDev": "fields.customfield_11801.displayName",
+  "QATester": "fields.customfield_13196.displayName",
+  "StartDate": "fields.customfield_13135",
+  "TargetEnd": "fields.customfield_13192",
+  "Team": "fields.customfield_13192.name"
 }

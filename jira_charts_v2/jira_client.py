@@ -33,3 +33,9 @@ class JiraClient:
 
     def get_myself(self):
         return self.get("myself")
+    
+    def get_raw(self, path, params=None):
+        url = f"https://api.atlassian.com/ex/jira/{self.cloud_id}{path}"
+        response = self.session.get(url, params=params)
+        response.raise_for_status()
+        return response
