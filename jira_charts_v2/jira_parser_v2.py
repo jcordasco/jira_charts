@@ -10,7 +10,7 @@ class JiraParserV2:
         full_path = project_path(path)
         with open(full_path, "r") as f:
             mapping = json.load(f)
-        print(f"✅ Loaded field mappings: {list(mapping.keys())}")
+        print(f"Loaded field mappings: {list(mapping.keys())}")
         return mapping
 
     def _extract_field(self, issue, path):
@@ -27,7 +27,6 @@ class JiraParserV2:
 
     def parse_issue(self, issue):
         fields = issue.get("fields", {})
-
         parsed_issue = {
             "Key": issue.get("key"),
         }
