@@ -36,7 +36,8 @@ class JiraParserV2:
 
         parsed_issue["IssueType"] = fields.get("issuetype", {}).get("name")
         parsed_issue["IssueTypeSubtask"] = fields.get("issuetype", {}).get("subtask")
-        parsed_issue["IssueTypeHierarchy"] = fields.get("issuetype", {}).get("hierarchy", {}).get("level")
+        parsed_issue["IssueTypeHierarchy"] = fields.get("issuetype", {}).get("hierarchyLevel")
+
 
         return parsed_issue
 

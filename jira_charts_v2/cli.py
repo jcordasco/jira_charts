@@ -6,6 +6,7 @@ from jira_parser_v2 import JiraParserV2
 from query_engine import run_query
 from utils import project_path
 from field_structure_exporter import fetch_field_definitions, extract_field_structure_with_names, export_structure_to_file
+from config_manager import get_default_mapping, set_default_mapping, DEFAULT_MAPPING_FALLBACK
 import pandas as pd
 
 def add_jql_arguments(subparser):
@@ -14,6 +15,14 @@ def add_jql_arguments(subparser):
 
 def add_export_argument(subparser):
     subparser.add_argument("--export", help="Optional: Export results to CSV file")
+
+def add_field_mapping_argument(subparser):
+    subparser.add_argument(
+        "--field-mapping",
+        type=str,
+        default=None,
+        help="Path to field mapping JSON file (default uses saved profile or field_mappings.json)"
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="Jira Charts v2 CLI")
@@ -25,11 +34,16 @@ def main():
     query_parser = subparsers.add_parser("query", help="Run JQL query")
     add_jql_arguments(query_parser)
     add_export_argument(query_parser)
+    add_field_mapping_argument(query_parser)
 
     # Export field structure command
     field_parser = subparsers.add_parser("export-field-structure", help="Export sample field structure from search result")
     field_parser.add_argument("--jql", required=True, help="Sample JQL query to analyze field structure")
     field_parser.add_argument("--output", required=True, help="Output file path for field structure JSON")
+
+    # Set default field mapping command
+    mapping_parser = subparsers.add_parser("set-default-mapping", help="Set default field mapping file")
+    mapping_parser.add_argument("--file", required=True, help="Field mapping filename, or 'default' to reset")
 
     args = parser.parse_args()
 
@@ -51,7 +65,8 @@ def main():
         print(f"Successfully authenticated as: {user.get('displayName')}")
 
     elif args.command == "query":
-        parser_v2 = JiraParserV2(project_path("field_mappings.json"))
+        field_mapping_file = args.field_mapping or get_default_mapping()
+        parser_v2 = JiraParserV2(project_path(field_mapping_file))
         df = run_query(jira, parser_v2, args.jql, limit=args.limit)
         print(df.head())
         print(f"\nTotal records fetched: {len(df)}")
@@ -73,6 +88,10 @@ def main():
         structure = extract_field_structure_with_names(sample_issue, field_definitions)
         export_structure_to_file(structure, args.output)
         print(f"Exported field structure to: {args.output}")
+
+    elif args.command == "set-default-mapping":
+        set_default_mapping(args.file)
+        print(f"Default field mapping set to: {args.file if args.file != 'default' else DEFAULT_MAPPING_FALLBACK}")
 
     else:
         parser.print_help()

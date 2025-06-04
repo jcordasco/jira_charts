@@ -1,0 +1,5 @@
+{
+  "Summary": "fields.summary",
+  "Status": "fields.status.name",
+  "StatusCategory": "fields.status.statusCategory.name"
+}
