@@ -39,3 +39,25 @@ class JiraClient:
         response = self.session.get(url, params=params)
         response.raise_for_status()
         return response
+    
+    def find_sprint_id_by_name(self, sprint_name):
+    # Get all boards (simple implementation: grab first board)
+        boards_response = self.get("agile/1.0/board")
+        boards = boards_response.get("values", [])
+
+        if not boards:
+            raise ValueError("No boards found for sprint lookup.")
+
+        for board in boards:
+            board_id = board["id"]
+
+            # Lookup sprints on this board
+            sprints_response = self.get(f"agile/1.0/board/{board_id}/sprint")
+            sprints = sprints_response.get("values", [])
+
+            for sprint in sprints:
+                if sprint["name"] == sprint_name:
+                    return sprint["id"]
+
+        return None
+

@@ -1,5 +1,5 @@
 {
-  "Summary": "fields.summary",
-  "Status": "fields.status.name",
-  "StatusCategory": "fields.status.statusCategory.name"
+  "Summary": "summary",
+  "Status": "status.name",
+  "StatusCategory": "status.statusCategory.name"
 }

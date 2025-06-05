@@ -1,14 +1,20 @@
 {
-  "Summary": "fields.summary",
-  "Status": "fields.status.name",
-  "StatusCategory": "fields.status.statusCategory.name",
-  "Created": "fields.created",
-  "Resolved": "fields.resolutiondate",
-  "StoryPoints": "fields.customfield_10010",
-  "Assignee": "fields.assignee.displayName",
-  "TempDev": "fields.customfield_11801.displayName",
-  "QATester": "fields.customfield_13196.displayName",
-  "StartDate": "fields.customfield_13135",
-  "TargetEnd": "fields.customfield_13192",
-  "Team": "fields.customfield_13192.name"
+  "Summary": "summary",
+  "Status": "status.name",
+  "StatusCategory": "status.statusCategory.name",
+  "Sprint": {
+    "path": "customfield_10002",
+    "type": "list",
+    "field": "name"
+  },
+  "SprintList": "customfield_10002",
+  "Created": "created",
+  "Resolved": "resolutiondate",
+  "StoryPoints": "customfield_10010",
+  "Assignee": "assignee.displayName",
+  "TempDev": "customfield_11801.displayName",
+  "QATester": "customfield_13196.displayName",
+  "StartDate": "customfield_13135",
+  "TargetEnd": "customfield_13192",
+  "Team": "customfield_13192.name"
 }
