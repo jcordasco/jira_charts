@@ -31,3 +31,6 @@ cloud.json
 
 #exlude .zip files
 *.zip
+
+#ignore files in the .clinerules directory
+.clinerules/
