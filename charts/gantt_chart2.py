@@ -29,6 +29,11 @@ def gantt_chart(df, export_path=None):
     df['StartDate'] = pd.to_datetime(df['StartDate'], errors='coerce').dt.date
     df['DueDate'] = pd.to_datetime(df['DueDate'], errors='coerce').dt.date
     df = df.dropna(subset=['StartDate', 'DueDate']).copy()
+    
+    # Check if we have any valid dates to chart
+    if df.empty:
+        logger.warning("No data with valid StartDate and DueDate fields to chart.")
+        return None
     df['Team'] = df['Team'].fillna("Team Unassigned")
     df = df.sort_values(['Team', 'StartDate']).reset_index(drop=True)
 
@@ -49,7 +54,13 @@ def gantt_chart(df, export_path=None):
             for level in range(len(levels) + 1):
                 conflict = False
                 for other_start, other_end in levels[level] if level < len(levels) else []:
-                    if start <= other_end and end >= other_start:
+                    # Original overlap check
+                    overlap = start <= other_end and end >= other_start
+                    # Check if tasks touch (one ends exactly when another starts or one starts the day after another ends)
+                    touch = start == other_end or end == other_start
+                    # Check if one task starts the day after another ends (adjacency)
+                    adjacent = (start - timedelta(days=1) == other_end) or (other_start - timedelta(days=1) == end)
+                    if overlap or touch or adjacent:
                         conflict = True
                         break
 
@@ -62,9 +73,18 @@ def gantt_chart(df, export_path=None):
 
         max_sublanes_per_team[team] = len(levels)
 
-    # Setup chart dimensions
-    min_date = df['StartDate'].min() - timedelta(days=1)
-    max_date = df['DueDate'].max() + timedelta(days=1)
+    # Setup chart dimensions - handle potential NaN values safely
+    min_date = df['StartDate'].min()
+    if pd.isna(min_date):
+        logger.warning("No valid StartDate found in data")
+        return None
+    min_date = min_date - timedelta(days=1)
+    
+    max_date = df['DueDate'].max()
+    if pd.isna(max_date):
+        logger.warning("No valid DueDate found in data")
+        return None
+    max_date = max_date + timedelta(days=1)
     total_lanes = sum(max_sublanes_per_team[team] for team in teams)
     fig_height = max(6, total_lanes * 0.6)
     fig, ax = plt.subplots(figsize=(14, fig_height))
@@ -84,7 +104,8 @@ def gantt_chart(df, export_path=None):
 
         start = row['StartDate']
         end = row['DueDate']
-        width = (end - start).days + 1
+        # Use a slightly reduced width to avoid visual touching
+        width = (end - start).days + 0.9
 
         ax.barh(
             y=y,
