@@ -1,14 +1,15 @@
 # Jira Charts v2
 
-A command-line tool to query Jira issues via OAuth 2.0 and render visual charts.
+A command-line tool to query Jira issues via OAuth 2.0 and render visual charts. This tool provides a flexible, extensible way to generate visualizations from your Jira data.
 
 ## Features
 
-- OAuth 2.0 authentication with token refresh
-- JQL or sprint-based querying
-- Customizable field mappings
-- Dynamic chart loading system
-- Export to CSV, PNG, or other formats
+- OAuth 2.0 authentication with automatic token refresh
+- JQL and sprint-based querying through a unified interface
+- Customizable field mappings via JSON configuration
+- Dynamic chart loading system with plugin architecture
+- Export to CSV, PNG, PDF, SVG or other formats
+- Support for custom field mappings to handle any Jira configuration
 
 ## Installation
 
@@ -31,6 +32,27 @@ A command-line tool to query Jira issues via OAuth 2.0 and render visual charts.
    - `REDIRECT_URI`: Usually http://localhost:5000/callback
    - `JIRA_BASE_URL`: Your Jira instance URL
 
+## Project Structure
+
+```
+jira_charts/
+├── __init__.py                 # Package marker
+├── auth_manager.py             # OAuth authentication
+├── chart_registry_v2.py        # Chart plugin system
+├── cli.py                      # Command interface
+├── config.py                   # Environment configuration
+├── config_manager.py           # Settings management
+├── field_structure_exporter.py # Field analysis
+├── jira_client.py              # API wrapper
+├── jira_parser_v2.py           # Field mapping
+├── query_engine.py             # Query execution
+├── utils.py                    # Utility functions
+├── charts/                     # Chart implementations
+│   ├── __init__.py
+│   └── gantt_chart.py          # Gantt chart
+└── README.md                   # Documentation
+```
+
 ## Usage
 
 ### Test Authentication
@@ -45,7 +67,7 @@ python cli.py test-auth
 # Using JQL
 python cli.py query --jql "project = DEMO AND status != Done" --export results.csv
 
-# Using sprint name
+# Using sprint name (automatically converted to JQL)
 python cli.py query --sprint "Current Sprint" --limit 100 --export results.csv
 ```
 
@@ -124,8 +146,39 @@ def my_chart(df, export_path=None):
 - "No accessible Jira resources found for this token" - Check your OAuth app permissions
 - Port conflicts - Change the port in REDIRECT_URI
 - "Invalid refresh token" - Re-authenticate by deleting the token file
+- "401 Unauthorized" - Ensure your OAuth app has the correct scopes (read:jira-user read:jira-work)
 
 ### Query Issues
 
 - No results - Verify JQL syntax and permissions
 - Missing fields - Check field mappings match your Jira configuration
+- StartDate/TargetEnd missing - These fields are required for Gantt charts, ensure they're properly mapped
+
+### Chart Issues
+
+- "KeyError: 'StartDate'" - The Gantt chart requires date fields that may not be present in all issues
+- "Chart not found" - Ensure the chart name matches one of the registered charts (e.g., "gantt")
+- Display issues - For non-interactive environments, use the `--save` option to export the chart to a file
+
+## Development
+
+### Adding New Field Mappings
+
+If your Jira instance uses custom fields, you can determine their structure by using:
+
+```bash
+python cli.py export-field-structure --jql "project = YOUR_PROJECT" --output custom_fields.json
+```
+
+Then create a new mapping file based on this structure.
+
+### Extending with New Charts
+
+The chart system is designed to be extensible. To add a new chart type:
+
+1. Create a new Python file in the `charts/` directory
+2. Import the register_chart decorator
+3. Implement your chart function that takes a dataframe and optional export path
+4. Return the processed dataframe for potential further export
+
+The auto-loading system will discover and register your chart automatically.
