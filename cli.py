@@ -107,10 +107,15 @@ def main():
         print(f"\nTotal records fetched: {len(df)}")
 
         # Generate chart if requested
+        chart_displayed = False
         if args.chart:
             if args.chart in available_charts:
                 logger.info(f"Generating {args.chart} chart...")
                 result_df = run_chart(args.chart, df, export_path=args.save)
+                
+                # Track if chart was displayed rather than saved
+                if not args.save:
+                    chart_displayed = True
                 
                 # If the chart function returns a modified dataframe, use it for export
                 if isinstance(result_df, pd.DataFrame):
@@ -122,6 +127,10 @@ def main():
         if args.export:
             df.to_csv(args.export, index=False)
             logger.info(f"Exported {len(df)} rows to {args.export}")
+            
+        # If a chart was displayed (not saved to file), pause to keep the window open
+        if chart_displayed:
+            input("Chart displayed. Press Enter to close the window and exit...")
 
     elif args.command == "export-field-structure":
         field_definitions = fetch_field_definitions(jira)
