@@ -16,6 +16,7 @@
   "QATester": "customfield_13196.displayName",
   "StartDate": "customfield_13135",
   "TargetEnd": "customfield_13192",
+  "DueDate": "duedate",
   "Team": "customfield_11400.name",
   "IssueType": "issuetype.name",
   "HierarchyLevel": "issuetype.hierarchyLevel"

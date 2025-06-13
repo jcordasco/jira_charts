@@ -14,6 +14,9 @@ config.json
 *.csv
 *.xlsx
 
+#exported images
+*.png
+
 # IDE and editor files
 .vscode/
 .idea/
