@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
-@register_chart("gantt2")
+@register_chart("gantt")
 def gantt_chart(df, export_path=None):
     """
     Generate a Gantt chart from a dataframe of issues.
@@ -117,9 +117,9 @@ def gantt_chart(df, export_path=None):
             edgecolor='black'
         )
 
-        # Add issue key as a label
+        # Add issue key as a label above the bar
         label = f"{row['Key']}"
-        ax.text(start, y, label, va='center', ha='left', fontsize=8)
+        ax.text(start, y - 0.25, label, va='bottom', ha='left', fontsize=8)
 
     # Set up y-axis ticks and labels for teams
     yticks = []

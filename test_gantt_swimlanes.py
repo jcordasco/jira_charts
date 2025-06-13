@@ -112,9 +112,9 @@ for idx, row in df.iterrows():
         edgecolor='black'
     )
 
-    # Add issue key as a label
+    # Add issue key as a label above the bar
     label = f"{row['Key']}"
-    ax.text(start, y, label, va='center', ha='left', fontsize=8)
+    ax.text(start, y - 0.15, label, va='bottom', ha='left', fontsize=8)
 
 # Set up y-axis ticks and labels for teams
 yticks = []
