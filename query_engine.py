@@ -1,4 +1,18 @@
+import pandas as pd
+
 def run_query(jira, parser, jql, limit=None):
+    """
+    Execute a JQL query and return the results as a pandas DataFrame.
+    
+    Args:
+        jira: JiraClient instance
+        parser: JiraParser instance
+        jql: JQL query string
+        limit: Maximum number of issues to return (optional)
+        
+    Returns:
+        pandas.DataFrame: DataFrame containing the parsed issues
+    """
     all_issues = []
     start_at = 0
     page_size = 100  # Conservative default; Jira allows up to 1000 if you want to adjust later
@@ -26,3 +40,5 @@ def run_query(jira, parser, jql, limit=None):
 
     df = parser.parse_issues(all_issues)
     return df
+
+# Sprint queries are now handled directly through JQL in the CLI

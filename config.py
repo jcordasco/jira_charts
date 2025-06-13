@@ -1,36 +1,27 @@
-import json
 import os
+from dotenv import load_dotenv
 
-CONFIG_FILE = 'config.json'
+load_dotenv()
 
-DEFAULT_CONFIG = {
-    "jira_url": "",
-    "client_id": "",
-    "redirect_uri": "http://localhost:5000/callback"
-}
+class Config:
+    CLIENT_ID = os.getenv("CLIENT_ID")
+    CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+    AUTH_URL = os.getenv("AUTH_URL")
+    TOKEN_URL = os.getenv("TOKEN_URL")
+    REDIRECT_URI = os.getenv("REDIRECT_URI")
+    SCOPE = os.getenv("SCOPE", "offline_access read:jira-user read:jira-work")
+    JIRA_BASE_URL = os.getenv("JIRA_BASE_URL")
+    TOKEN_FILE = os.getenv("TOKEN_FILE", "token.json")
 
-def load_config():
-    if not os.path.exists(CONFIG_FILE):
-        save_config(DEFAULT_CONFIG)
-        return DEFAULT_CONFIG
+    @classmethod
+    def validate(cls):
+        missing = []
+        for attr in ["CLIENT_ID", "CLIENT_SECRET", "AUTH_URL", "TOKEN_URL", "REDIRECT_URI", "JIRA_BASE_URL"]:
+            if not getattr(cls, attr):
+                missing.append(attr)
+        if missing:
+            raise ValueError(f"Missing required config values: {', '.join(missing)}")
 
-    try:
-        with open(CONFIG_FILE, 'r') as f:
-            data = f.read().strip()
-            if not data:
-                save_config(DEFAULT_CONFIG)
-                return DEFAULT_CONFIG
-            return json.loads(data)
-    except (json.JSONDecodeError, IOError):
-        print("Warning: config file was invalid, resetting to defaults.")
-        save_config(DEFAULT_CONFIG)
-        return DEFAULT_CONFIG
-
-def save_config(config):
-    with open(CONFIG_FILE, 'w') as f:
-        json.dump(config, f, indent=4)
-
-def update_config(**kwargs):
-    config = load_config()
-    config.update(kwargs)
-    save_config(config)
+# Handle insecure transport for local development
+if os.getenv("OAUTHLIB_INSECURE_TRANSPORT") == "1":
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"

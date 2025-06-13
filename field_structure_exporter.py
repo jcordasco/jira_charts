@@ -1,85 +1,92 @@
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 def fetch_field_definitions(jira):
     """
-    Retrieve field definitions from Jira.
+    Fetch field definitions from Jira to get field names and types.
+    
+    Args:
+        jira: JiraClient instance
+        
+    Returns:
+        Dictionary mapping field IDs to field definitions
     """
-    response = jira.get_raw("/rest/api/3/field")
-    fields = response.json()
+    fields_response = jira.get("field")
+    field_dict = {}
+    
+    for field in fields_response:
+        field_dict[field.get("id")] = field
+        
+    return field_dict
 
-    field_map = {}
-
-    for field in fields:
-        field_id = field.get("id")
-        field_name = field.get("name")
-        schema_type = field.get("schema", {}).get("type", "unknown")
-        field_map[field_id] = {
-            "name": field_name,
-            "type": schema_type
-        }
-
-    return field_map
-
-def analyze_field_structure(data):
+def extract_simple_path(data, path):
     """
-    Recursively analyze the structure of fields inside a Jira issue.
+    Extract a value from a nested dictionary using a dot-separated path.
+    
+    Args:
+        data: Dictionary to extract from
+        path: Dot-separated path (e.g., "fields.summary")
+        
+    Returns:
+        Extracted value or None if path doesn't exist
     """
-    if isinstance(data, dict):
-        children = []
-        for key, value in data.items():
-            child_structure = analyze_field_structure(value)
-            children.append({
-                "id": key,
-                "type": type_of(value),
-                "children": child_structure if child_structure else None
-            })
-        return children if children else None
-
-    elif isinstance(data, list):
-        if data:
-            return analyze_field_structure(data[0])
+    parts = path.split('.')
+    current = data
+    
+    for part in parts:
+        if isinstance(current, dict) and part in current:
+            current = current.get(part)
         else:
             return None
-    else:
-        return None
+            
+    return current
 
-def type_of(value):
-    if value is None:
-        return "null"
-    elif isinstance(value, str):
-        return "string"
-    elif isinstance(value, bool):
-        return "boolean"
-    elif isinstance(value, int) or isinstance(value, float):
-        return "number"
-    elif isinstance(value, list):
-        return "array"
-    elif isinstance(value, dict):
-        return "object"
-    else:
-        return "unknown"
-
-def extract_field_structure_with_names(sample_issue, field_definitions):
+def extract_field_structure_with_names(issue, field_definitions):
     """
-    Merge real structure with field definitions.
+    Extract the structure of fields from a sample issue with field names.
+    
+    Args:
+        issue: Jira issue object
+        field_definitions: Dictionary of field definitions from fetch_field_definitions
+        
+    Returns:
+        Dictionary with field structure and names
     """
-    fields = sample_issue.get("fields", {})
-    structure = []
-
-    for field_id, field_value in fields.items():
-        field_children = analyze_field_structure(field_value)
-
-        field_meta = field_definitions.get(field_id, {"name": "(unknown)", "type": type_of(field_value)})
-
-        structure.append({
-            "id": field_id,
-            "name": field_meta["name"],
-            "type": field_meta["type"],
-            "children": field_children
-        })
-
+    structure = {}
+    fields = issue.get("fields", {})
+    
+    for field_id, value in fields.items():
+        field_def = field_definitions.get(field_id, {})
+        field_name = field_def.get("name", field_id)
+        
+        if isinstance(value, dict):
+            field_type = "object"
+            field_value = value
+        elif isinstance(value, list):
+            field_type = "array"
+            field_value = value
+        else:
+            field_type = "scalar"
+            field_value = value
+            
+        structure[field_id] = {
+            "name": field_name,
+            "type": field_type,
+            "value": field_value,
+            "path": f"fields.{field_id}"
+        }
+        
     return structure
 
-def export_structure_to_file(structure, output_file):
-    with open(output_file, "w") as f:
-        json.dump(structure, f, indent=4)
+def export_structure_to_file(structure, output_path):
+    """
+    Export field structure to a JSON file.
+    
+    Args:
+        structure: Field structure dictionary
+        output_path: Path to save the JSON file
+    """
+    with open(output_path, 'w') as f:
+        json.dump(structure, f, indent=2, default=str)
